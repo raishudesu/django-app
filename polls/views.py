@@ -15,10 +15,17 @@ def index(request):
 
 
 def detail(request, question_id):
-    try:
-        question = Question.objects.get(pk=question_id)
-    except Question.DoesNotExist:
-        raise Http404("Question does not exist")
+    # the code below uses try except pattern
+    # try:
+    #     question = Question.objects.get(pk=question_id)
+    # except Question.DoesNotExist:
+    #     raise Http404("Question does not exist")
+    # return render(request, "polls/detail.html", {"question": question})
+
+    #  the code below uses django's shortcut for error 404 handling, this is shorter
+    #  so we will be using this
+
+    question = get_object_or_404(Question, pk=question_id)
     return render(request, "polls/detail.html", {"question": question})
 
 
