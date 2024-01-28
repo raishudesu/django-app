@@ -3,8 +3,10 @@ from .models import Question
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
+# views are basically functions that does something (rendering templates/fetch and display data from db)
 
 
+# function for fetching Questions and rendering it on an html template
 def index(request):
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
     context = {
@@ -14,6 +16,7 @@ def index(request):
     return render(request, "polls/index.html", context)
 
 
+# function to display the current question via dynamic route which uses the question id
 def detail(request, question_id):
     # the code below uses try except pattern
     # try:
